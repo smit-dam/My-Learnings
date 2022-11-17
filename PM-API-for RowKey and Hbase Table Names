@@ -1,0 +1,18 @@
+How Queries related to Hbase Table names and Row Key Formats in PM handled
+
+1.	What was the Ask?
+2.	What were the challenges?
+3.	How was it resolved?
+
+What was the Ask?
+Non-PM module features (e.g., Trends module) need PM KPI data from PM Hbase tables. Need Hbase Table names and row key format details.
+
+What were the challenges?
+Dependent on the PM development team for code/details and to share the Hbase table names and row key format details.
+Non-PM Developers to develop redundant code for row-key generation in their respective module code.
+Difficult to track impacted modules for Row-key related changes.
+PM module has different tables based on node hierarchy - Cell, Band, Sector, Site, …. and time/frequency  hierarchy – quarter, hour, daily, BBH, NBH, and Weekly; vendors-Samsung, Airspan, etc; domain-RAN, WiFi
+
+How was it resolved?
+We created a library that has methods with input parameters - Domain, Vendor, Frequency Hierarchy, Node-Hierarchy, Start-Date, End-Date, and Node-List for which you want row-keys.
+This library has the logic implemented to return the map consisting of two elements {{‘tableName’,’hbaseTableName’},{‘rowkeylist’,’List-of-Row-Keys’}} 
